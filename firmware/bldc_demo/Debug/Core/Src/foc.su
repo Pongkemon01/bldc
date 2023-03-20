@@ -1,0 +1,10 @@
+../Core/Inc/fixedptc.h:135:1:fixedpt_mul	32	static
+../Core/Inc/fixedptc.h:143:1:fixedpt_div	32	static
+../Core/Inc/fixedptc.h:230:1:fixedpt_sqrt	40	static
+../Core/Inc/fixedptc.h:267:1:fixedpt_sin	32	static
+../Core/Inc/fixedptc.h:301:1:fixedpt_cos	16	static
+../Core/Inc/fixedptc.h:416:1:fixedpt_atan2	56	static
+../Core/Src/foc.c:4:6:ClarkeTransform	24	static
+../Core/Src/foc.c:10:6:ParkTransform	40	static
+../Core/Src/foc.c:19:6:InvParkTransform	40	static
+../Core/Src/foc.c:38:6:SVModulation	64	static

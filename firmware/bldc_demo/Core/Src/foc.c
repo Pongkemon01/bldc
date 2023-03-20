@@ -88,38 +88,38 @@ void SVModulation( SVM_Vector* res, Clarke_Data* data, fixedpt V_Motor, const fi
     switch(res->sector)
     {
         case 1:
-        res->t_u = fixedpt_add( t1, fixept_add( t2, t0_by_2 ) );
-        res->t_v = fixept_add( t2, t0_by_2 );
+        res->t_u = fixedpt_add( t1, fixedpt_add( t2, t0_by_2 ) );
+        res->t_v = fixedpt_add( t2, t0_by_2 );
         res->t_w = t0_by_2;
         break;
 
         case 2:
-        res->t_v = fixedpt_add( t1, fixept_add( t2, t0_by_2 ) );
-        res->t_u = fixept_add( t2, t0_by_2 );
+        res->t_v = fixedpt_add( t1, fixedpt_add( t2, t0_by_2 ) );
+        res->t_u = fixedpt_add( t2, t0_by_2 );
         res->t_w = t0_by_2;
         break;
 
         case 3:
-        res->t_v = fixedpt_add( t1, fixept_add( t2, t0_by_2 ) );
-        res->t_w = fixept_add( t2, t0_by_2 );
+        res->t_v = fixedpt_add( t1, fixedpt_add( t2, t0_by_2 ) );
+        res->t_w = fixedpt_add( t2, t0_by_2 );
         res->t_u = t0_by_2;
         break;
 
         case 4:
-        res->t_w = fixedpt_add( t1, fixept_add( t2, t0_by_2 ) );
-        res->t_v = fixept_add( t2, t0_by_2 );
+        res->t_w = fixedpt_add( t1, fixedpt_add( t2, t0_by_2 ) );
+        res->t_v = fixedpt_add( t2, t0_by_2 );
         res->t_u = t0_by_2;
         break;
 
         case 5:
-        res->t_w = fixedpt_add( t1, fixept_add( t2, t0_by_2 ) );
-        res->t_u = fixept_add( t2, t0_by_2 );
+        res->t_w = fixedpt_add( t1, fixedpt_add( t2, t0_by_2 ) );
+        res->t_u = fixedpt_add( t2, t0_by_2 );
         res->t_v = t0_by_2;
         break;
 
         default:
-        res->t_u = fixedpt_add( t1, fixept_add( t2, t0_by_2 ) );
-        res->t_w = fixept_add( t2, t0_by_2 );
+        res->t_u = fixedpt_add( t1, fixedpt_add( t2, t0_by_2 ) );
+        res->t_w = fixedpt_add( t2, t0_by_2 );
         res->t_v = t0_by_2;
         break;
     }

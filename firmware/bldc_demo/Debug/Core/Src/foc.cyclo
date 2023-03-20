@@ -1,0 +1,10 @@
+fixedptc.h:135:1:fixedpt_mul	1
+fixedptc.h:143:1:fixedpt_div	1
+fixedptc.h:230:1:fixedpt_sqrt	10
+fixedptc.h:267:1:fixedpt_sin	7
+fixedptc.h:301:1:fixedpt_cos	1
+fixedptc.h:416:1:fixedpt_atan2	3
+foc.c:4:6:ClarkeTransform	1
+foc.c:10:6:ParkTransform	1
+foc.c:19:6:InvParkTransform	1
+foc.c:38:6:SVModulation	11
