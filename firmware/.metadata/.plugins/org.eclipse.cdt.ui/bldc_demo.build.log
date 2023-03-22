@@ -1,17 +1,17 @@
-13:37:15 **** Incremental Build of configuration Debug for project bldc_demo ****
+10:24:12 **** Incremental Build of configuration Debug for project bldc_demo ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/stm32f3xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f3xx_it.d" -MT"Core/Src/stm32f3xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f3xx_it.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "bldc_demo.elf" @"objects.list"   -mcpu=cortex-m4 -T"/home/akp/bldc/firmware/bldc_demo/STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bldc_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: bldc_demo.elf
  
 arm-none-eabi-size   bldc_demo.elf 
 arm-none-eabi-objdump -h -S  bldc_demo.elf  > "bldc_demo.list"
    text	   data	    bss	    dec	    hex	filename
-  29256	    124	   5748	  35128	   8938	bldc_demo.elf
+  33236	    124	   6724	  40084	   9c94	bldc_demo.elf
 Finished building: default.size.stdout
  
 Finished building: bldc_demo.list
  
 
-13:37:16 Build Finished. 0 errors, 0 warnings. (took 580ms)
+10:24:13 Build Finished. 0 errors, 0 warnings. (took 579ms)
 

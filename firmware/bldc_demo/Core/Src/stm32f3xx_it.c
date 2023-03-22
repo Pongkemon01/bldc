@@ -24,6 +24,7 @@
 #include "task.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "cmsis_os.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,7 +44,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern osThreadId_t ADCTaskHandle;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -188,22 +189,16 @@ void SysTick_Handler(void)
 void TIM1_CC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_CC_IRQn 0 */
-	static uint32_t current_cnt;
-	 current_cnt = TIM1->CNT;
+	static BaseType_t xHigherPriorityTaskWoken;
   /* USER CODE END TIM1_CC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
   /* USER CODE BEGIN TIM1_CC_IRQn 1 */
+  xTaskNotifyFromISR( ADCTaskHandle, 0, eNoAction, &xHigherPriorityTaskWoken );
 
-  while(current_cnt == TIM1->CNT);	// Wait until CNT change
-  if(current_cnt < TIM1->CNT)
-  {
-	  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
-  }
-  else
-  {
-	  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
-  }
-
+  /* Force a context switch if xHigherPriorityTaskWoken is now set to pdTRUE.
+  The macro used to do this is dependent on the port and may be called
+  portEND_SWITCHING_ISR. */
+  portYIELD_FROM_ISR( xHigherPriorityTaskWoken );
   /* USER CODE END TIM1_CC_IRQn 1 */
 }
 
