@@ -77,6 +77,9 @@ const osThreadAttr_t ADCTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
+uint32_t Vdc_adc;		// ADC Value reading from Vdc
+uint32_t I1_adc;		// I1 Value
+uint32_t I2_adc;		// I2 Value
 
 /* USER CODE END PV */
 
@@ -225,8 +228,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_TIM1|RCC_PERIPHCLK_ADC12;
-  PeriphClkInit.Adc12ClockSelection = RCC_ADC12PLLCLK_DIV1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_TIM1;
   PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLK_PLLCLK;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
@@ -267,7 +269,7 @@ static void MX_ADC1_Init(void)
   /** Common config
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV1;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
@@ -275,7 +277,7 @@ static void MX_ADC1_Init(void)
   hadc1.Init.NbrOfDiscConversion = 1;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_LEFT;
   hadc1.Init.NbrOfConversion = 2;
   hadc1.Init.DMAContinuousRequests = DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
@@ -309,6 +311,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
+  sConfig.Channel = ADC_CHANNEL_2;
   sConfig.Rank = ADC_REGULAR_RANK_2;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
@@ -528,6 +531,12 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
 	/* Start the system here */
+	/* Initial all variables */
+	Vdc_adc = 0;
+	I1_adc = 0;
+	I2_adc = 0;
+
+	/* Starting interrupt (just for demo) */
 	  TIM1->CCR1 = 5;
 	  TIM1->DIER |= TIM_DIER_CC1IE_Msk;
 	  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
@@ -565,12 +574,16 @@ void StartADCTask(void *argument)
 		while(current_cnt == TIM1->CNT);	// Wait until CNT change
 		if(current_cnt < TIM1->CNT)
 		{
-			 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
-		 }
-		 else
-		 {
-			 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
-		 }
+			current_cnt -= 2;
+			while(current_cnt > TIM1->CNT);	// Wait for 2 timer counting
+			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
+		}
+		else
+		{
+			current_cnt += 2;
+			while(current_cnt < TIM1->CNT);	// Wait for 2 timer counting
+			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
+		}
 	}
   /* USER CODE END StartADCTask */
 }

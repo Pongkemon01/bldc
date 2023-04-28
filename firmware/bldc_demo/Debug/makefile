@@ -64,8 +64,8 @@ all: main-build
 main-build: bldc_demo.elf secondary-outputs
 
 # Tool invocations
-bldc_demo.elf bldc_demo.map: $(OBJS) $(USER_OBJS) /home/akp/bldc/firmware/bldc_demo/STM32F303K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "bldc_demo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/akp/bldc/firmware/bldc_demo/STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bldc_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+bldc_demo.elf bldc_demo.map: $(OBJS) $(USER_OBJS) C:\Users\seapup-02\Desktop\bldc\firmware\bldc_demo\STM32F303K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "bldc_demo.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\seapup-02\Desktop\bldc\firmware\bldc_demo\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bldc_demo.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
